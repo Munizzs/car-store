@@ -1,18 +1,28 @@
 <html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
 <body>
-<h2>Create Car</h2>
-
-<form action="/create-car" method="post">
-
-    <label>Car Name</label>
-    <input type="text" name="car-name" id="car-name">
-
-    <label>Car Color</label>
-        <input type="text" name="car-color" id="car-color">
-
-    <button type="submit">Register</button>
-
-</form>
-
+  <div>
+    <h1>Cars</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        <c:forEach var="car" items="${cars}">
+            <tr>
+                <td></td>
+                <td>${car.name}</td>
+            </tr>
+            <tr>
+                            <td></td>
+                            <td>${car.color}</td>
+                        </tr>
+        </c:forEach>
+    </table>
+  </div>
 </body>
 </html>
