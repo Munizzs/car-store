@@ -63,6 +63,10 @@ public class CarDao {
 
             }
 
+            for(Car car: cars){
+                System.out.println(car.getName()+" - "+car.getColor());
+            }
+
             System.out.println("success in select * car");
 
             connection.close();
