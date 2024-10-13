@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CarDao {
+
     public void createCar(Car car){
         String SQL = "INSERT INTO CAR (NAME, COLOR) VALUES (?, ?)";
 
@@ -54,17 +55,18 @@ public class CarDao {
 
             while (resultSet.next()) {
 
+                String carId = resultSet.getString("id");
                 String carName = resultSet.getString("name");
                 String carColor = resultSet.getString("color");
 
-                Car car = new Car(carName, carColor);
+                Car car = new Car(carId, carName, carColor);
 
                 cars.add(car);
 
             }
 
             for(Car car: cars){
-                System.out.println(car.getName()+" - "+car.getColor());
+                System.out.println(car.getId()+" "+car.getName()+" - "+car.getColor());
             }
 
             System.out.println("success in select * car");
@@ -78,6 +80,30 @@ public class CarDao {
             System.out.println("fail in database connection");
 
             return Collections.emptyList();
+
+        }
+    }
+
+    public void deleteCarById(String carId){
+        String SQL = "DELETE CAR WHERE ID = ?";
+
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, carId);
+            preparedStatement.execute();
+
+            System.out.println("success on delete car with id: " + carId);
+
+            connection.close();
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
 
         }
     }
