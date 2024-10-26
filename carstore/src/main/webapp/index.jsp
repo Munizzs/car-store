@@ -5,12 +5,13 @@
 <form action="/create-car" method="post">
 
     <label>Car Name</label>
-    <input type="text" name="car-name" id="car-name">
+    <input type="text" name="car-name" id="car-name" value="${param.name}">
+    <input type="hidden" id="id" name="id" value="${param.id}">
 
-    <label>Car Name</label>
-    <input type="text" name="car-color" id="car-color">
+    <label>Car Color</label>
+    <input type="text" name="car-color" id="car-color" value="${param.color}">
 
-    <button type="submit">Register</button>
+    <button type="submit">Save</button>
 
 </form>
 

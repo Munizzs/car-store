@@ -15,12 +15,18 @@ public class CreateCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String id = request.getParameter("id");
         String carName = request.getParameter("car-name");
         String carColor = request.getParameter("car-color");
 
-        Car car = new Car(carName, carColor);
+        CarDao carDao= new CarDao();
+        Car car = new Car(id, carName, carColor);
 
-        new CarDao().createCar(car);
+        if (id.isEmpty()) {
+            carDao.createCar(car);
+        }else {
+            carDao.updateCar(car);
+        }
 
         response.sendRedirect("/find-all-cars");
 
